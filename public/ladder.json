@@ -1,1 +1,489 @@
-{"fetchedAt": "2026-07-18T00:00:00.000Z", "ladder": {}}
+{
+  "fetchedAt": "2026-07-23T11:12:08.903Z",
+  "data": {
+    "ladders": [
+      {
+        "id": 219213,
+        "teamUniqueKey": "64f0ca13-b0d8-4d39-b014-ae70740cb343",
+        "hasAdjustments": null,
+        "logoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780792360820%2F8f94f276ed55d2355379f0dbb2ec1a4f?generation=1780792361542397&alt=media",
+        "name": "Trinity 11U Lilac",
+        "alias": null,
+        "divisionId": 33355,
+        "divisionName": "11&U Mixed (Femals and Males) - no restrictions A/1",
+        "grade": "A/1",
+        "matchSubstatusRefId": 5,
+        "P": "1",
+        "W": "1",
+        "L": "0",
+        "D": "0",
+        "F": "24",
+        "A": "7",
+        "FW": "0",
+        "FL": "0",
+        "B": "0",
+        "PTS": "0",
+        "smr": "3.43",
+        "win": "1.00",
+        "goalAverage": "342.86",
+        "goalDifference": "17",
+        "fpg": "24.00",
+        "ppg": "0.00",
+        "gdpg": "17.00",
+        "h2h": null,
+        "adjustments": [],
+        "isHidden": "0",
+        "rk": "1",
+        "ptsByDivision": null,
+        "ladderCalculationTypeIds": [
+          {
+            "id": 7,
+            "order": 1
+          },
+          {
+            "id": 1,
+            "order": 2
+          }
+        ],
+        "ladderCalculationTypeId": "7",
+        "allDivisions": null,
+        "rankingTieBreaker": "0"
+      },
+      {
+        "id": 219142,
+        "teamUniqueKey": "e505e8b8-6ad5-41f7-b024-e177bdc27be1",
+        "hasAdjustments": null,
+        "logoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149322318%2F53e70b447f1a56af4a23b32979582fa4?generation=1779149322800183&alt=media",
+        "name": "Nunawading 11U Emerald",
+        "alias": null,
+        "divisionId": 33355,
+        "divisionName": "11&U Mixed (Femals and Males) - no restrictions A/1",
+        "grade": "A/1",
+        "matchSubstatusRefId": 5,
+        "P": "1",
+        "W": "1",
+        "L": "0",
+        "D": "0",
+        "F": "25",
+        "A": "16",
+        "FW": "0",
+        "FL": "0",
+        "B": "0",
+        "PTS": "0",
+        "smr": "1.56",
+        "win": "1.00",
+        "goalAverage": "156.25",
+        "goalDifference": "9",
+        "fpg": "25.00",
+        "ppg": "0.00",
+        "gdpg": "9.00",
+        "h2h": null,
+        "adjustments": [],
+        "isHidden": "0",
+        "rk": "2",
+        "ptsByDivision": null,
+        "ladderCalculationTypeIds": null,
+        "ladderCalculationTypeId": "7",
+        "allDivisions": null,
+        "rankingTieBreaker": "0"
+      },
+      {
+        "id": 219254,
+        "teamUniqueKey": "c3f080b6-8a0d-47b7-baba-8c21743e9d15",
+        "hasAdjustments": null,
+        "logoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149846871%2F2fd37e994b535b1b97b4a2307c4ae4cf?generation=1779149847225683&alt=media",
+        "name": "St James 11U Blue",
+        "alias": null,
+        "divisionId": 33355,
+        "divisionName": "11&U Mixed (Femals and Males) - no restrictions A/1",
+        "grade": "A/1",
+        "matchSubstatusRefId": 5,
+        "P": "1",
+        "W": "1",
+        "L": "0",
+        "D": "0",
+        "F": "22",
+        "A": "21",
+        "FW": "0",
+        "FL": "0",
+        "B": "0",
+        "PTS": "0",
+        "smr": "1.05",
+        "win": "1.00",
+        "goalAverage": "104.76",
+        "goalDifference": "1",
+        "fpg": "22.00",
+        "ppg": "0.00",
+        "gdpg": "1.00",
+        "h2h": null,
+        "adjustments": [],
+        "isHidden": "0",
+        "rk": "3",
+        "ptsByDivision": null,
+        "ladderCalculationTypeIds": null,
+        "ladderCalculationTypeId": "7",
+        "allDivisions": null,
+        "rankingTieBreaker": "0"
+      },
+      {
+        "id": 219253,
+        "teamUniqueKey": "34e5957f-c39a-408c-8fca-75f3c2f30e19",
+        "hasAdjustments": null,
+        "logoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781428316533%2Fd9638150df4981528ea33a71df338044?generation=1781428317026222&alt=media",
+        "name": "HFNC Jets 11U Gold",
+        "alias": null,
+        "divisionId": 33355,
+        "divisionName": "11&U Mixed (Femals and Males) - no restrictions A/1",
+        "grade": "A/1",
+        "matchSubstatusRefId": 5,
+        "P": "1",
+        "W": "0",
+        "L": "1",
+        "D": "0",
+        "F": "21",
+        "A": "22",
+        "FW": "0",
+        "FL": "0",
+        "B": "0",
+        "PTS": "0",
+        "smr": "0.95",
+        "win": "0.00",
+        "goalAverage": "95.45",
+        "goalDifference": "-1",
+        "fpg": "21.00",
+        "ppg": "0.00",
+        "gdpg": "-1.00",
+        "h2h": null,
+        "adjustments": [],
+        "isHidden": "0",
+        "rk": "4",
+        "ptsByDivision": null,
+        "ladderCalculationTypeIds": null,
+        "ladderCalculationTypeId": "7",
+        "allDivisions": null,
+        "rankingTieBreaker": "0"
+      },
+      {
+        "id": 219141,
+        "teamUniqueKey": "689d8493-f1bd-4efb-a96b-cb160597f340",
+        "hasAdjustments": null,
+        "logoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780626542907%2F52d223f588662b291e3467d32f1284ef?generation=1780626543277145&alt=media",
+        "name": "Heathmont United 11U Black",
+        "alias": null,
+        "divisionId": 33355,
+        "divisionName": "11&U Mixed (Femals and Males) - no restrictions A/1",
+        "grade": "A/1",
+        "matchSubstatusRefId": 5,
+        "P": "1",
+        "W": "0",
+        "L": "1",
+        "D": "0",
+        "F": "16",
+        "A": "25",
+        "FW": "0",
+        "FL": "0",
+        "B": "0",
+        "PTS": "0",
+        "smr": "0.64",
+        "win": "0.00",
+        "goalAverage": "64.00",
+        "goalDifference": "-9",
+        "fpg": "16.00",
+        "ppg": "0.00",
+        "gdpg": "-9.00",
+        "h2h": null,
+        "adjustments": [],
+        "isHidden": "0",
+        "rk": "5",
+        "ptsByDivision": null,
+        "ladderCalculationTypeIds": null,
+        "ladderCalculationTypeId": "7",
+        "allDivisions": null,
+        "rankingTieBreaker": "0"
+      },
+      {
+        "id": 219212,
+        "teamUniqueKey": "76a6ed70-19ad-4b7d-9ba3-2b6af55bc98e",
+        "hasAdjustments": null,
+        "logoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781145546928%2Fc90b3ddb5967297728bc44831299a5c1?generation=1781145547417984&alt=media",
+        "name": "Ringwood North 11U Blue",
+        "alias": null,
+        "divisionId": 33355,
+        "divisionName": "11&U Mixed (Femals and Males) - no restrictions A/1",
+        "grade": "A/1",
+        "matchSubstatusRefId": 5,
+        "P": "1",
+        "W": "0",
+        "L": "1",
+        "D": "0",
+        "F": "7",
+        "A": "24",
+        "FW": "0",
+        "FL": "0",
+        "B": "0",
+        "PTS": "0",
+        "smr": "0.29",
+        "win": "0.00",
+        "goalAverage": "29.17",
+        "goalDifference": "-17",
+        "fpg": "7.00",
+        "ppg": "0.00",
+        "gdpg": "-17.00",
+        "h2h": null,
+        "adjustments": [],
+        "isHidden": "0",
+        "rk": "6",
+        "ptsByDivision": null,
+        "ladderCalculationTypeIds": null,
+        "ladderCalculationTypeId": "7",
+        "allDivisions": null,
+        "rankingTieBreaker": "0"
+      }
+    ],
+    "nextResults": [
+      {
+        "teamId": 219141,
+        "nextMatch": [
+          {
+            "teamId": 219141,
+            "matchId": 2793853,
+            "startTime": "2026-07-24T23:40:00.000Z",
+            "team1Name": "Ringwood North 11U Blue",
+            "team2Name": "Heathmont United 11U Black",
+            "matchStatus": null,
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781145546928%2Fc90b3ddb5967297728bc44831299a5c1?generation=1781145547417984&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780626542907%2F52d223f588662b291e3467d32f1284ef?generation=1780626543277145&alt=media",
+            "matchSubstatusRefId": 1
+          }
+        ]
+      },
+      {
+        "teamId": 219142,
+        "nextMatch": [
+          {
+            "teamId": 219142,
+            "matchId": 2793803,
+            "startTime": "2026-07-24T23:40:00.000Z",
+            "team1Name": "Nunawading 11U Emerald",
+            "team2Name": "HFNC Jets 11U Gold",
+            "matchStatus": null,
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149322318%2F53e70b447f1a56af4a23b32979582fa4?generation=1779149322800183&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781428316533%2Fd9638150df4981528ea33a71df338044?generation=1781428317026222&alt=media",
+            "matchSubstatusRefId": 1
+          }
+        ]
+      },
+      {
+        "teamId": 219212,
+        "nextMatch": [
+          {
+            "teamId": 219212,
+            "matchId": 2793853,
+            "startTime": "2026-07-24T23:40:00.000Z",
+            "team1Name": "Ringwood North 11U Blue",
+            "team2Name": "Heathmont United 11U Black",
+            "matchStatus": null,
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781145546928%2Fc90b3ddb5967297728bc44831299a5c1?generation=1781145547417984&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780626542907%2F52d223f588662b291e3467d32f1284ef?generation=1780626543277145&alt=media",
+            "matchSubstatusRefId": 1
+          }
+        ]
+      },
+      {
+        "teamId": 219213,
+        "nextMatch": [
+          {
+            "teamId": 219213,
+            "matchId": 2793829,
+            "startTime": "2026-07-24T23:40:00.000Z",
+            "team1Name": "Trinity 11U Lilac",
+            "team2Name": "St James 11U Blue",
+            "matchStatus": null,
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780792360820%2F8f94f276ed55d2355379f0dbb2ec1a4f?generation=1780792361542397&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149846871%2F2fd37e994b535b1b97b4a2307c4ae4cf?generation=1779149847225683&alt=media",
+            "matchSubstatusRefId": 1
+          }
+        ]
+      },
+      {
+        "teamId": 219253,
+        "nextMatch": [
+          {
+            "teamId": 219253,
+            "matchId": 2793803,
+            "startTime": "2026-07-24T23:40:00.000Z",
+            "team1Name": "Nunawading 11U Emerald",
+            "team2Name": "HFNC Jets 11U Gold",
+            "matchStatus": null,
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149322318%2F53e70b447f1a56af4a23b32979582fa4?generation=1779149322800183&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781428316533%2Fd9638150df4981528ea33a71df338044?generation=1781428317026222&alt=media",
+            "matchSubstatusRefId": 1
+          }
+        ]
+      },
+      {
+        "teamId": 219254,
+        "nextMatch": [
+          {
+            "teamId": 219254,
+            "matchId": 2793829,
+            "startTime": "2026-07-24T23:40:00.000Z",
+            "team1Name": "Trinity 11U Lilac",
+            "team2Name": "St James 11U Blue",
+            "matchStatus": null,
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780792360820%2F8f94f276ed55d2355379f0dbb2ec1a4f?generation=1780792361542397&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149846871%2F2fd37e994b535b1b97b4a2307c4ae4cf?generation=1779149847225683&alt=media",
+            "matchSubstatusRefId": 1
+          }
+        ]
+      }
+    ],
+    "lastResults": [
+      {
+        "teamId": 219141,
+        "last5": [
+          {
+            "code": "LOST",
+            "teamId": 219141,
+            "matchId": 2793686,
+            "startTime": "2026-07-17T23:40:00.000Z",
+            "team1Name": "Heathmont United 11U Black",
+            "team2Name": "Nunawading 11U Emerald",
+            "hasPenalty": 0,
+            "team1Score": 16,
+            "team2Score": 25,
+            "matchStatus": "ENDED",
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780626542907%2F52d223f588662b291e3467d32f1284ef?generation=1780626543277145&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149322318%2F53e70b447f1a56af4a23b32979582fa4?generation=1779149322800183&alt=media",
+            "team1ResultId": 2,
+            "team2ResultId": 1,
+            "team1PenaltyScore": null,
+            "team2PenaltyScore": null,
+            "matchSubstatusRefId": 5
+          }
+        ]
+      },
+      {
+        "teamId": 219142,
+        "last5": [
+          {
+            "code": "WON",
+            "teamId": 219142,
+            "matchId": 2793686,
+            "startTime": "2026-07-17T23:40:00.000Z",
+            "team1Name": "Heathmont United 11U Black",
+            "team2Name": "Nunawading 11U Emerald",
+            "hasPenalty": 0,
+            "team1Score": 16,
+            "team2Score": 25,
+            "matchStatus": "ENDED",
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780626542907%2F52d223f588662b291e3467d32f1284ef?generation=1780626543277145&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149322318%2F53e70b447f1a56af4a23b32979582fa4?generation=1779149322800183&alt=media",
+            "team1ResultId": 2,
+            "team2ResultId": 1,
+            "team1PenaltyScore": null,
+            "team2PenaltyScore": null,
+            "matchSubstatusRefId": 5
+          }
+        ]
+      },
+      {
+        "teamId": 219212,
+        "last5": [
+          {
+            "code": "LOST",
+            "teamId": 219212,
+            "matchId": 2793722,
+            "startTime": "2026-07-17T23:40:00.000Z",
+            "team1Name": "Ringwood North 11U Blue",
+            "team2Name": "Trinity 11U Lilac",
+            "hasPenalty": 0,
+            "team1Score": 7,
+            "team2Score": 24,
+            "matchStatus": "ENDED",
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781145546928%2Fc90b3ddb5967297728bc44831299a5c1?generation=1781145547417984&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780792360820%2F8f94f276ed55d2355379f0dbb2ec1a4f?generation=1780792361542397&alt=media",
+            "team1ResultId": 2,
+            "team2ResultId": 1,
+            "team1PenaltyScore": null,
+            "team2PenaltyScore": null,
+            "matchSubstatusRefId": 5
+          }
+        ]
+      },
+      {
+        "teamId": 219213,
+        "last5": [
+          {
+            "code": "WON",
+            "teamId": 219213,
+            "matchId": 2793722,
+            "startTime": "2026-07-17T23:40:00.000Z",
+            "team1Name": "Ringwood North 11U Blue",
+            "team2Name": "Trinity 11U Lilac",
+            "hasPenalty": 0,
+            "team1Score": 7,
+            "team2Score": 24,
+            "matchStatus": "ENDED",
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781145546928%2Fc90b3ddb5967297728bc44831299a5c1?generation=1781145547417984&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1780792360820%2F8f94f276ed55d2355379f0dbb2ec1a4f?generation=1780792361542397&alt=media",
+            "team1ResultId": 2,
+            "team2ResultId": 1,
+            "team1PenaltyScore": null,
+            "team2PenaltyScore": null,
+            "matchSubstatusRefId": 5
+          }
+        ]
+      },
+      {
+        "teamId": 219253,
+        "last5": [
+          {
+            "code": "LOST",
+            "teamId": 219253,
+            "matchId": 2793743,
+            "startTime": "2026-07-17T23:40:00.000Z",
+            "team1Name": "HFNC Jets 11U Gold",
+            "team2Name": "St James 11U Blue",
+            "hasPenalty": 0,
+            "team1Score": 21,
+            "team2Score": 22,
+            "matchStatus": "ENDED",
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781428316533%2Fd9638150df4981528ea33a71df338044?generation=1781428317026222&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149846871%2F2fd37e994b535b1b97b4a2307c4ae4cf?generation=1779149847225683&alt=media",
+            "team1ResultId": 2,
+            "team2ResultId": 1,
+            "team1PenaltyScore": null,
+            "team2PenaltyScore": null,
+            "matchSubstatusRefId": 5
+          }
+        ]
+      },
+      {
+        "teamId": 219254,
+        "last5": [
+          {
+            "code": "WON",
+            "teamId": 219254,
+            "matchId": 2793743,
+            "startTime": "2026-07-17T23:40:00.000Z",
+            "team1Name": "HFNC Jets 11U Gold",
+            "team2Name": "St James 11U Blue",
+            "hasPenalty": 0,
+            "team1Score": 21,
+            "team2Score": 22,
+            "matchStatus": "ENDED",
+            "team1LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1781428316533%2Fd9638150df4981528ea33a71df338044?generation=1781428317026222&alt=media",
+            "team2LogoUrl": "https://storage.googleapis.com/download/storage/v1/b/world-sport-action.appspot.com/o/%2Fteam%2Flogo%2Fundefined%2F1779149846871%2F2fd37e994b535b1b97b4a2307c4ae4cf?generation=1779149847225683&alt=media",
+            "team1ResultId": 2,
+            "team2ResultId": 1,
+            "team1PenaltyScore": null,
+            "team2PenaltyScore": null,
+            "matchSubstatusRefId": 5
+          }
+        ]
+      }
+    ],
+    "isHidden": false
+  }
+}
