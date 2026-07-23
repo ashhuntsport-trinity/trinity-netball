@@ -25,11 +25,6 @@ const OUTFILE = path.join(
     try {
       const url = response.url();
 
-      // Debug: print all Squadi calls
-      if (url.includes('api-netball.squadi.com')) {
-        console.log(url);
-      }
-
       // Capture fixtures endpoint
       if (
         url.includes('/livescores/round/matches') &&

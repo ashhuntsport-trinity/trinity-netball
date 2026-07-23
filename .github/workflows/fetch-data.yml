@@ -1,6 +1,19 @@
 name: Fetch Trinity Fixtures & Ladder
 
+
 on:
+  # ── Scheduled runs ───────────────────────────────────────────
+  schedule:
+    # Every 5 minutes on Saturdays 7:50am–6:10pm AEST (= Friday 21:50–Saturday 08:10 UTC)
+    # GitHub cron uses UTC. AEST = UTC+10.
+    - cron: '*/5 21 * * 5'   # Fri 21:50–21:59 UTC = Sat 7:50–7:59am AEST
+    - cron: '*/5 22-23 * * 5'  # Fri 22:00–23:59 UTC = Sat 8:00–9:59am AEST
+    - cron: '*/5 0-7 * * 6'    # Sat 00:00–07:59 UTC = Sat 10:00am–5:59pm AEST
+    - cron: '*/5 8 * * 6'     # Sat 08:00–08:10 UTC = Sat 6:00–6:10pm AEST
+
+    # Every 12 hours all other times (keeps fixtures/schedule up to date)
+    - cron: '0 */12 * * *'
+
   workflow_dispatch:
 
 permissions:
