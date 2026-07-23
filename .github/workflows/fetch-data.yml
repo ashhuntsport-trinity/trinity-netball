@@ -30,7 +30,9 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
 
       - name: Install Playwright browser
-        run: npx playwright install chromium
+        run: |
+          cd scripts
+          npx playwright install chromium
 
       - name: Scrape fixtures
         run: node scripts/scrape-fixtures.js
