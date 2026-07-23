@@ -374,13 +374,7 @@ main{max-width:860px;margin:0 auto;padding:.9rem 1rem 3rem}
 
 <div class="page-header">
   <h1>Fixtures &amp; Results</h1>
-  <p>2026 Season · Maroondah Nets</p>
-  <div class="stats">
-    <div class="sc"><span class="n" id="stat-teams">16</span><span class="l">Teams</span></div>
-    <div class="sc"><span class="n" id="stat-live">0</span><span class="l">Live</span></div>
-    <div class="sc"><span class="n" id="stat-played">2</span><span class="l">Played</span></div>
-    <div class="sc"><span class="n" id="stat-upcoming">62</span><span class="l">Upcoming</span></div>
-  </div>
+  <p>2026 Spring Season</p> 
   <div class="tabs-bar">
     <button class="tab active" data-tab="today">📅 Match Day</button>
     <button class="tab" data-tab="schedule">📋 Full Schedule</button>
@@ -520,7 +514,7 @@ async function fetchAll() {
   applyFixtures(fixtures.data);
   applyLadder(ladder.data);
 
-  setStatus('Loaded from GitHub Pages', false, true);
+  setStatus('Loaded', false, true);
 }
 
 async function fetchFixtures(){
