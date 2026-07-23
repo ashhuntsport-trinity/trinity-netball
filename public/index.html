@@ -512,8 +512,8 @@ async function fetchAll() {
     fetch('./ladder.json').then(r => r.json())
   ]);
 
-  applyFixtures(fixtures);
-  applyLadder(ladder);
+    applyFixtures(fixtures.data);
+    applyLadder(ladder.data);
 
   setStatus('Loaded from GitHub Pages', false, true);
 }
