@@ -64,7 +64,7 @@ The easiest way on Windows:
 1. In your GitHub repo → **Settings** → **Secrets and variables** → **Actions**
 2. Click **New repository secret**
 3. Name: `SQUADI_API_KEY`
-4. Value: `f68a1ffd26dd50c0fafa1f496a92e7b674e07fb0cfab5c778c2cf47cf6f61f785f569274a7a4467b1000b706cb1c830c31bed8ee64c069df2c65667228af22ce4db75452a28ced3ab03a1292b0784691f316b48a2795c208853fc0152b50d14347c468501857a1beb34f86698fbe1118314e414cf1a38af223e707076736a1897554716e4fafd9bb23b8d1939bafc0b92a2f978645916fbf4982b942941b5231b6807a9e5696fd55cd1bd998bcbdf6ab1036ae9a2640764f382e8e1c55123a1685faf3ff4b54a09c6f1a7e5d59962b52d3e6159383914d51d4553de4efd14278be1f2f515303937f85e67e0cd0db650c426984674ebed755f6bcbf97c30a0dba`
+4. Value: 
 5. Click **Add secret**
 
 ### 4. Enable GitHub Pages
