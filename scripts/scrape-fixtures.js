@@ -2,19 +2,18 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
-const LADDER_PAGE =
-  'https://registration.netballconnect.com/livescorePublicLadder?organisationKey=ab63c5b3-fd1a-41a6-a1a2-326989b20247&competitionUniqueKey=3023e0a7-dbcf-4f0f-a7ce-350e61da84d6&yearId=8&divisionId=33355';
+const FIXTURE_PAGE =
+  'https://registration.netballconnect.com/livescoreSeasonFixture?organisationKey=ab63c5b3-fd1a-41a6-a1a2-326989b20247&competitionUniqueKey=3023e0a7-dbcf-4f0f-a7ce-350e61da84d6&yearId=8&divisionId=All';
 
 const OUTFILE = path.join(
   __dirname,
   '..',
   'public',
-  'ladder.json'
+  'fixtures.json'
 );
 
 (async () => {
-  let captured = false;
-  let ladderData = null;
+  let fixtureData = null;
 
   const browser = await chromium.launch({
     headless: true
@@ -26,31 +25,37 @@ const OUTFILE = path.join(
     try {
       const url = response.url();
 
-      if (
-        url.includes('/livescores/teams/ladder/v2') &&
-        !captured
-      ) {
-        captured = true;
+      // Debug: print all Squadi calls
+      if (url.includes('api-netball.squadi.com')) {
+        console.log(url);
+      }
 
-        console.log('Ladder endpoint found');
+      // Capture fixtures endpoint
+      if (
+        url.includes('/livescores/round/matches') &&
+        !fixtureData
+      ) {
+        console.log('Fixtures endpoint found');
         console.log(url);
 
-        ladderData = await response.json();
+        fixtureData = await response.json();
       }
     } catch (err) {
       console.log('Response parse error:', err.message);
     }
   });
 
-  await page.goto(LADDER_PAGE, {
+  await page.goto(FIXTURE_PAGE, {
     waitUntil: 'networkidle',
     timeout: 120000
   });
 
   await page.waitForTimeout(5000);
 
-  if (!ladderData) {
-    throw new Error('No ladder JSON captured');
+  await browser.close();
+
+  if (!fixtureData) {
+    throw new Error('No fixture JSON captured');
   }
 
   fs.writeFileSync(
@@ -58,14 +63,12 @@ const OUTFILE = path.join(
     JSON.stringify(
       {
         fetchedAt: new Date().toISOString(),
-        data: ladderData
+        data: fixtureData
       },
       null,
       2
     )
   );
 
-  console.log(`Saved ladder to ${OUTFILE}`);
-
-  await browser.close();
+  console.log(`Saved fixtures to ${OUTFILE}`);
 })();
