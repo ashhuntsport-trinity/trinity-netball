@@ -571,8 +571,22 @@ function applyFixtures(fixtureData){
       }
 
       for (const m of (round.matches || [])) {
-        matches.push(enrichMatch(m, round));
-      }
+
+            const team1 =
+              m.team1?.name || '';
+
+            const team2 =
+              m.team2?.name || '';
+
+            if (
+              !isTrinity(team1) &&
+              !isTrinity(team2)
+            ) {
+              continue;
+            }
+
+            matches.push(enrichMatch(m, round));
+          }
     }
 
     console.log('Matches loaded:', matches.length);
