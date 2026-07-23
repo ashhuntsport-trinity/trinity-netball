@@ -393,9 +393,7 @@ main{max-width:860px;margin:0 auto;padding:.9rem 1rem 3rem}
   <div class="status-bar">
     <span><span class="status-dot" id="status-dot"></span><span id="status-text">Loading…</span></span>
     <span style="display:flex;gap:.4rem">
-      <button class="inv-btn" id="refresh-btn" onclick="manualRefresh('fixtures')">↻ Scores</button>
-      <button class="inv-btn" id="ladder-btn" onclick="manualRefresh('ladder')">↻ Ladder</button>
-      <button class="inv-btn" onclick="manualRefresh('all')">↻ All</button>
+<button class="inv-btn" onclick="manualRefresh()">↻ Refresh</button>
     </span>
   </div>
 
@@ -459,6 +457,7 @@ main{max-width:860px;margin:0 auto;padding:.9rem 1rem 3rem}
 // CONFIG — paste your Cloud Run URL here after deployment
 // ══════════════════════════════════════════════════════════════
 const USE_STATIC_FILES = true;
+const PROXY_URL = null;
 
 let TODAY_DATE = '';
 let DATE_ORDER = [];
@@ -518,8 +517,6 @@ async function fetchAll() {
     fetch('./ladder.json').then(r => r.json())
   ]);
   
-  console.log('FIXTURES DATA', fixtureData);
-
   applyFixtures(fixtures.data);
   applyLadder(ladder.data);
 
@@ -552,57 +549,54 @@ async function fetchLadder(){
 }
 
 // Manual refresh button — also invalidates server cache
-async function manualRefresh(target){
-  if (!PROXY_URL){ showSetupNotice(); return; }
-  setStatus('Invalidating cache…', true);
-  try {
-    await fetch(`${PROXY_URL}/admin/invalidate?target=${target}`, {method:'POST'});
-  } catch(e){}
-  if (target==='fixtures') await fetchFixtures();
-  else if (target==='ladder') await fetchLadder();
-  else await fetchAll();
+async function manualRefresh() {
+  location.reload();
 }
 
 // ── Apply data ────────────────────────────────────────────────
 function applyFixtures(fixtureData){
 
-  const matches = [];
+  console.log('FIXTURES DATA', fixtureData);
 
-  for (const round of (fixtureData.rounds || [])) {
+    const matches = [];
 
-    if (
-      !TRINITY_DIVISION_IDS.includes(
-        Number(round.divisionId)
+    for (const round of (fixtureData.rounds || [])) {
+
+      if (
+        !TRINITY_DIVISION_IDS.includes(
+          Number(round.divisionId)
+        )
+      ) {
+        continue;
+      }
+
+      for (const m of (round.matches || [])) {
+        matches.push(enrichMatch(m, round));
+      }
+    }
+
+    console.log('Matches loaded:', matches.length);
+
+    allMatches = matches.sort(
+      (a,b) => sortKey(a).localeCompare(sortKey(b))
+    );
+
+    allTeams = [
+      ...new Set(
+        matches.map(m =>
+          isTrinity(m.team1)
+            ? m.team1
+            : m.team2
+        )
       )
-    ) {
-      continue;
-    }
-
-    for (const m of (round.matches || [])) {
-      matches.push(enrichMatch(m, round));
-    }
-  }
-
-  console.log('Matches loaded:', matches.length);
-
-  allMatches = matches.sort(
-    (a,b) => sortKey(a).localeCompare(sortKey(b))
-  );
-
-  allTeams = [
+    ].sort();
+    
+    DATE_ORDER = [
     ...new Set(
-      matches.map(m =>
-        isTrinity(m.team1)
-          ? m.team1
-          : m.team2
-      )
+      matches.map(m => m.date_str)
     )
-  ].sort();
-  
-  DATE_ORDER = [
-  ...new Set(
-    matches.map(m => m.date_str)
-  )
+
+    
 ];
 
 TODAY_DATE = DATE_ORDER[0] || '';
