@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "Data fetch scripts for Trinity Netball fixtures and ladder",
   "scripts": {
-    "fixtures": "node fetch-fixtures.js",
-    "ladder": "node fetch-ladder.js",
-    "ladder:force": "node fetch-ladder.js --force",
-    "all": "node fetch-fixtures.js; node fetch-ladder.js",
+    "fixtures": "node scrape-fixtures.js",
+    "ladder": "node scrape-ladder.js",
     "test": "node test-playwright.js"
   },
   "dependencies": {

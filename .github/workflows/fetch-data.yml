@@ -20,20 +20,36 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: |
-          cd scripts
-          npm install
+        working-directory: scripts
+        run: npm install
 
       - name: Install Playwright browser
-        run: |
-          npx playwright install chromium
+        run: npx playwright install chromium
 
-      - name: Run Playwright test
-        run: |
-          node scripts/test-playwright.js
+      - name: Scrape fixtures
+        run: node scripts/scrape-fixtures.js
 
-      - name: Upload screenshot
+      - name: Scrape ladder
+        run: node scripts/scrape-ladder.js
+
+      - name: Commit updated JSON
+        run: |
+          git config user.name "Trinity Netball Bot"
+          git config user.email "bot@trinitynetball.com.au"
+
+          git add public/*.json
+
+          if ! git diff --staged --quiet; then
+            git commit -m "Update fixtures and ladder"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Upload JSON artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-test
-          path: fixture-page.png
+          name: netball-data
+          path: |
+            public/fixtures.json
+            public/ladder.json
