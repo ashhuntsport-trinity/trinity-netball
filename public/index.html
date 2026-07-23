@@ -208,7 +208,8 @@ main{max-width:860px;margin:0 auto;padding:1rem 1rem 3rem}
 // ── Configuration ─────────────────────────────────────────────────────────
 // Set this to your Cloud Run URL after deployment, e.g.:
 // const PROXY_URL = 'https://trinity-netball-proxy-abc123-ts.a.run.app';
-const PROXY_URL = '';   // ← PASTE YOUR CLOUD RUN URL HERE
+fetchJSON('./fixtures.json')
+fetchJSON('./ladder.json')
 
 const TODAY_DATE = 'Sat 18 Jul 2026';
 const DATE_ORDER = ['Sat 18 Jul 2026','Sat 25 Jul 2026','Sat 1 Aug 2026','Sat 8 Aug 2026'];
