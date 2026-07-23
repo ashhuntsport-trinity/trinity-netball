@@ -458,7 +458,7 @@ main{max-width:860px;margin:0 auto;padding:.9rem 1rem 3rem}
 // ══════════════════════════════════════════════════════════════
 // CONFIG — paste your Cloud Run URL here after deployment
 // ══════════════════════════════════════════════════════════════
-const PROXY_URL = '';  // e.g. 'https://trinity-netball-proxy-xxxx.a.run.app'
+const USE_STATIC_FILES = true;
 
 const TODAY_DATE = 'Sat 18 Jul 2026';
 const DATE_ORDER = ['Sat 18 Jul 2026','Sat 25 Jul 2026','Sat 1 Aug 2026','Sat 8 Aug 2026'];
@@ -501,28 +501,21 @@ window.addEventListener('DOMContentLoaded', () => {
   buildTeamFilters(BAKED_TEAMS);
   renderAll(BAKED_MATCHES, {});
 
-  if (PROXY_URL) {
-    fetchAll();
-    scheduleAuto();
-  } else {
-    setStatus('Using saved data — configure PROXY_URL for live updates', false);
-    showSetupNotice();
-  }
+ fetchAll();
+ 
 });
 
 // ── Fetch ─────────────────────────────────────────────────────
-async function fetchAll(){
-  setStatus('Fetching…', true);
-  try {
-    const res = await fetch(`${PROXY_URL}/all`);
-    if (!res.ok) throw new Error(res.status);
-    const json = await res.json();
-    if (json.fixtures) applyFixtures(json.fixtures);
-    if (json.ladder)   applyLadder(json.ladder);
-    setStatus(`Updated ${new Date().toLocaleTimeString('en-AU')}`, false, true);
-  } catch(e){
-    setStatus(`Fetch failed — ${e.message}`, false, false);
-  }
+async function fetchAll() {
+  const [fixtures, ladder] = await Promise.all([
+    fetch('./fixtures.json').then(r => r.json()),
+    fetch('./ladder.json').then(r => r.json())
+  ]);
+
+  applyFixtures(fixtures);
+  applyLadder(ladder);
+
+  setStatus('Loaded from GitHub Pages', false, true);
 }
 
 async function fetchFixtures(){
