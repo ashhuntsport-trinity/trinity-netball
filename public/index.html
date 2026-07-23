@@ -632,49 +632,26 @@ function applyLadder(ladderData){
 
 // ── Enrich match ──────────────────────────────────────────────
 function enrichMatch(m, round){
-  const iso  = m.start||m.startTime||'';
-  const dt   = iso ? new Date(iso) : null;
-  const aest = dt  ? new Date(dt.getTime()+10*3600_000) : null;
-  const dateStr = aest ? aest.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short',year:'numeric'}) : '';
-  const timeStr = aest ? aest.toLocaleTimeString('en-AU',{hour:'numeric',minute:'2-digit',hour12:true}) : '';
+  const dt = iso ? new Date(iso) : null;
 
-  const t1   = m.team1?.name||m.team1||'';
-  const t2   = m.team2?.name||m.team2||'';
-  const t1Id = m.team1?.id||m.team1Id||null;
-  const t2Id = m.team2?.id||m.team2Id||null;
-  const status = m.matchStatus||'';
-  const t1s  = m.team1Score??0;
-  const t2s  = m.team2Score??0;
-  const t1t  = isTrinity(t1);
+const dateStr = dt
+  ? dt.toLocaleDateString('en-AU', {
+      timeZone: 'Australia/Melbourne',
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    })
+  : '';
 
-  let result;
-  if (status==='STARTED') result='LIVE';
-  else if (status==='ENDED'){
-    const ts=t1t?t1s:t2s, os=t1t?t2s:t1s;
-    result = ts>os?'WIN':ts<os?'LOSS':'DRAW';
-  } else result='UPCOMING';
-
-  const divName  = m.division||round?.division?.name||m.divisionName||'';
-  const divShort = divName
-    .replace(/\(Femals and Males\)|\(Females & Males\)/g,'')
-    .replace(/\(Males 13\/U.*?participate\)/g,'')
-    .replace(/restrictions apply|- no restrictions/g,'')
-    .replace(/\s+/g,' ').trim();
-
-  // Extract just court number from "Court 5" → "Ct 5"
-  const courtRaw = m.venueCourt?.name||m.court||'';
-  const courtNum = courtRaw.replace(/Court\s*/i,'');
-  const courtLabel = courtNum ? `Court ${courtNum}` : courtRaw;
-
-  return {
-    id:m.id, round:round?.name||m.round||'',
-    div_short:divShort, start:iso,
-    date_str:dateStr, time_str:timeStr,
-    team1:t1, team2:t2, team1Id:t1Id, team2Id:t2Id,
-    team1Score:t1s, team2Score:t2s,
-    matchStatus:status, result,
-    court:courtLabel,
-  };
+const timeStr = dt
+  ? dt.toLocaleTimeString('en-AU', {
+      timeZone: 'Australia/Melbourne',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    })
+  : '';
 }
 
 function sortKey(m){
