@@ -4,9 +4,13 @@
   "description": "Data fetch scripts for Trinity Netball fixtures and ladder",
   "scripts": {
     "fixtures": "node fetch-fixtures.js",
-    "ladder":   "node fetch-ladder.js",
+    "ladder": "node fetch-ladder.js",
     "ladder:force": "node fetch-ladder.js --force",
-    "all":      "node fetch-fixtures.js; node fetch-ladder.js"
+    "all": "node fetch-fixtures.js; node fetch-ladder.js",
+    "test": "node test-playwright.js"
+  },
+  "dependencies": {
+    "playwright": "^1.54.0"
   },
   "engines": {
     "node": ">=18"
