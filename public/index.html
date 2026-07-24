@@ -933,8 +933,8 @@ function makeCard(m, lmap){
   const done = ['WIN','LOSS','DRAW'].includes(m.result);
   const hasScore = (live||done) && (m.team1Score||m.team2Score||done);
 
-  const t1RankNum = lmap[m.team1Id]?.rank;
-const t2RankNum = lmap[m.team2Id]?.rank;
+//const t1RankNum = lmap[m.team1Id]?.rank;
+//const t2RankNum = lmap[m.team2Id]?.rank;
 
 function ordinal(n){
   if (!n) return '?';
