@@ -988,12 +988,10 @@ const showLadderPreview =
     <div class="matchup">
       <div class="team-block">
         <div class="team ${t1t?'tt':''}">${esc(m.team1)}</div>
-        ${t1Rank}
       </div>
       ${scoreHtml}
       <div class="team-block team-block-right">
-        <div class="team ${t2t?'tt':''}">${esc(m.team2)}</div>
-        ${t2Rank}
+        <div class="team ${t2t?'tt':''}">${esc(m.team2)}</div>        
       </div>
     </div>
     ${footHtml?`<div class="cfoot">${footHtml}</div>`:''}
