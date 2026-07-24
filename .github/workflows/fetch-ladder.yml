@@ -4,7 +4,9 @@ name: Fetch Trinity Ladders
 on:
   # ── Scheduled runs ───────────────────────────────────────────
   schedule:    
-    - cron: '1 */12 * * *'
+    - cron: '0 10 * * 6' # 7:00 PM Saturday AEST
+    - cron: '0 10 * * 0' # 7:00 PM Saturday AEST
+    
 
   workflow_dispatch:
 
