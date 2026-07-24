@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-24T10:07:59.844Z",
+  "fetchedAt": "2026-07-24T10:23:39.859Z",
   "data": {
     "rounds": [
       {
@@ -12460,7 +12460,7 @@
             "extraTimeType": null,
             "isFinals": false,
             "extraTimeFor": null,
-            "team1LineupConfirmed": false,
+            "team1LineupConfirmed": true,
             "team2LineupConfirmed": false,
             "matchAction": null,
             "competition": {
