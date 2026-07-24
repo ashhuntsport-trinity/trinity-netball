@@ -933,12 +933,39 @@ function makeCard(m, lmap){
   const done = ['WIN','LOSS','DRAW'].includes(m.result);
   const hasScore = (live||done) && (m.team1Score||m.team2Score||done);
 
+  const t1RankNum = lmap[m.team1Id]?.rank;
+const t2RankNum = lmap[m.team2Id]?.rank;
+
+function ordinal(n){
+  if (!n) return '?';
+
+  const suffix =
+    [11,12,13].includes(n % 100)
+      ? 'th'
+      : ({1:'st',2:'nd',3:'rd'}[n % 10] || 'th');
+
+  return `${n}${suffix}`;
+}
+
+const showLadderPreview =
+  !hasScore &&
+  m.date_str === TODAY_DATE;
+
   const scoreHtml = hasScore
-    ? `<div class="score ${live?'score-live':''}">
-        ${live?'<span class="ldot"></span>':''}
-        <span>${m.team1Score}</span><span class="dash">–</span><span>${m.team2Score}</span>
+  ? `<div class="score ${live ? 'score-live' : ''}">
+      ${live ? '<span class="ldot"></span>' : ''}
+      <span>${m.team1Score}</span>
+      <span class="dash">–</span>
+      <span>${m.team2Score}</span>
+     </div>`
+  : showLadderPreview
+    ? `<div class="vs">
+         ${ordinal(t1RankNum)}
+         <span class="dash">v</span>
+         ${ordinal(t2RankNum)}
        </div>`
-    : '<div class="vs">vs</div>';
+    : `<div class="vs">vs</div>`;
+
 
   const bmap={LIVE:'b-live ● LIVE',WIN:'b-win Win',LOSS:'b-loss Loss',DRAW:'b-draw Draw',UPCOMING:'b-up Upcoming'};
   const [bcls,...bw]=(bmap[m.result]||'b-up Upcoming').split(' ');
