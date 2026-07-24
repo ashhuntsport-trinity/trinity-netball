@@ -157,6 +157,13 @@ body{
   transition:all .15s;white-space:nowrap;
 }
 .inv-btn:hover{background:var(--pu);color:#fff;border-color:var(--pu)}
+.refresh-btn{
+  padding:6px 18px;
+  font-size:13px;
+  font-weight:700;
+  border-width:1.5px;
+}
+.last-updated{color:var(--tf);font-size:11px}
 
 /* ── TODAY INTRO ── */
 .today-intro{
@@ -229,6 +236,24 @@ main{max-width:860px;margin:0 auto;padding:.9rem 1rem 3rem}
   color:var(--pu);
 }
 .dcnt{font-size:11px;color:var(--tf)}
+
+/* ── AGE GROUP SECTIONS ── */
+.agegrp{margin-bottom:.3rem}
+.agegrp.hidden{display:none}
+.agehead{
+  display:flex;justify-content:space-between;align-items:center;
+  margin:.7rem 0 .4rem;
+  padding:.3rem .65rem;
+  background:var(--pu4);
+  border-left:3px solid var(--pu2);
+  border-radius:6px;
+}
+.agehead .albl{
+  font-size:11px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;
+  color:var(--pu);
+}
+.agehead .acnt{font-size:10px;color:var(--tf);font-weight:600}
 
 /* ── CARD ── */
 .card{
@@ -391,9 +416,11 @@ main{max-width:860px;margin:0 auto;padding:.9rem 1rem 3rem}
 <div class="panel active" id="panel-today">
 
   <div class="status-bar">
-    <span><span class="status-dot" id="status-dot"></span><span id="status-text">Loading…</span></span>
+    <span style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
+      <span class="status-dot" id="status-dot"></span><span id="status-text">Loading…</span><span id="last-updated" class="last-updated"></span>
+    </span>
     <span style="display:flex;gap:.4rem">
-<button class="inv-btn" onclick="manualRefresh()">↻ Refresh</button>
+<button class="inv-btn refresh-btn" onclick="manualRefresh()">↻ Refresh</button>
     </span>
   </div>
 
@@ -412,7 +439,6 @@ main{max-width:860px;margin:0 auto;padding:.9rem 1rem 3rem}
       <button class="fbtn tf-btn" data-tfilter="LIVE">🔴 Live</button>
       <button class="fbtn tf-btn" data-tfilter="WIN">Wins</button>
       <button class="fbtn tf-btn" data-tfilter="LOSS">Losses</button>
-      <button class="fbtn tf-btn" data-tfilter="UPCOMING">Upcoming</button>
     </div>
     <div class="frow" id="today-team-btns"></div>
   </div>
@@ -501,10 +527,101 @@ function scheduleAuto(){
   autoTimer = setInterval(() => fetchFixtures(), autoRefreshInterval());
 }
 
+// ── Match Day date resolution ────────────────────────────────
+// Matches are played on Saturdays. From Wednesday onward we switch the
+// Match Day tab over to previewing the *next* round, and keep showing
+// that same round's matches all the way through the following Tuesday.
+const MELB_TZ = 'Australia/Melbourne';
+
+function melbourneYMD(){
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: MELB_TZ, year:'numeric', month:'2-digit', day:'2-digit'
+  }).formatToParts(new Date());
+  const get = t => +parts.find(p=>p.type===t).value;
+  return { y:get('year'), mo:get('month'), d:get('day') };
+}
+
+function melbourneDayOfWeek(){
+  const wd = new Intl.DateTimeFormat('en-US', { timeZone: MELB_TZ, weekday:'short' }).format(new Date());
+  return { Sun:0, Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6 }[wd];
+}
+
+function addDaysUTC(date, days){
+  const nd = new Date(date.getTime());
+  nd.setUTCDate(nd.getUTCDate() + days);
+  return nd;
+}
+
+function formatMelbDateStr(date){
+  return date.toLocaleDateString('en-AU', {
+    timeZone: MELB_TZ, weekday:'short', day:'numeric', month:'short', year:'numeric'
+  });
+}
+
+// Returns the date_str (matching enrichMatch's format) of the round that
+// should be shown on the Match Day tab right now.
+function computeMatchDayTargetStr(){
+  const { y, mo, d } = melbourneYMD();
+  const anchor = new Date(Date.UTC(y, mo-1, d, 12, 0, 0)); // UTC-noon, safely inside the Melbourne calendar day
+  const dow = melbourneDayOfWeek(); // 0=Sun ... 6=Sat
+  // Wed/Thu/Fri look forward to this week's Saturday; Sat stays; Sun/Mon/Tue look back to last Saturday.
+  const offsetToSat = { 0:-1, 1:-2, 2:-3, 3:3, 4:2, 5:1, 6:0 }[dow];
+  return formatMelbDateStr(addDaysUTC(anchor, offsetToSat));
+}
+
+function resolveMatchDayDate(dateOrder, firstStartByDate){
+  if (!dateOrder.length) return '';
+  const target = computeMatchDayTargetStr();
+  if (dateOrder.includes(target)) return target;
+  // No matches on the exact target date (e.g. bye week) — fall back to
+  // whichever available date is chronologically closest to it.
+  const { y, mo, d } = melbourneYMD();
+  const anchor = new Date(Date.UTC(y, mo-1, d, 12, 0, 0));
+  const dow = melbourneDayOfWeek();
+  const offsetToSat = { 0:-1, 1:-2, 2:-3, 3:3, 4:2, 5:1, 6:0 }[dow];
+  const targetTime = addDaysUTC(anchor, offsetToSat).getTime();
+  let best = dateOrder[0], bestDiff = Infinity;
+  for (const dt of dateOrder){
+    const diff = Math.abs(new Date(firstStartByDate[dt]).getTime() - targetTime);
+    if (diff < bestDiff){ bestDiff = diff; best = dt; }
+  }
+  return best;
+}
+
+function formatLastUpdated(iso){
+  if (!iso) return '';
+  const dt = new Date(iso);
+  if (isNaN(dt)) return '';
+  const datePart = dt.toLocaleDateString('en-AU', { timeZone: MELB_TZ, day:'numeric', month:'short' });
+  const timePart = dt.toLocaleTimeString('en-AU', { timeZone: MELB_TZ, hour:'numeric', minute:'2-digit', hour12:true });
+  return `Updated ${datePart}, ${timePart}`;
+}
+
+// Sets allMatches / allTeams / DATE_ORDER / TODAY_DATE from a flat matches array.
+function processMatches(matches){
+  allMatches = matches.slice().sort((a,b) => sortKey(a).localeCompare(sortKey(b)));
+
+  allTeams = [
+    ...new Set(matches.map(m => isTrinity(m.team1) ? m.team1 : m.team2))
+  ].sort();
+
+  const firstStartByDate = {};
+  for (const m of matches){
+    if (!(m.date_str in firstStartByDate) || m.start < firstStartByDate[m.date_str]){
+      firstStartByDate[m.date_str] = m.start;
+    }
+  }
+  DATE_ORDER = Object.keys(firstStartByDate)
+    .sort((a,b) => firstStartByDate[a].localeCompare(firstStartByDate[b]));
+
+  TODAY_DATE = resolveMatchDayDate(DATE_ORDER, firstStartByDate);
+}
+
 // ── Boot ──────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  buildTeamFilters(BAKED_TEAMS);
-  renderAll(BAKED_MATCHES, {});
+  processMatches(BAKED_MATCHES);
+  buildTeamFilters(allTeams.length ? allTeams : BAKED_TEAMS);
+  renderAll(allMatches.length ? allMatches : BAKED_MATCHES, {});
 
  fetchAll();
  
@@ -519,6 +636,9 @@ async function fetchAll() {
   
   applyFixtures(fixtures.data);
   applyLadder(ladder.data);
+
+  const lu = formatLastUpdated(fixtures.fetchedAt);
+  document.getElementById('last-updated').textContent = lu ? `· ${lu}` : '';
 
   setStatus('Loaded', false, true);
 }
@@ -591,30 +711,7 @@ function applyFixtures(fixtureData){
 
     console.log('Matches loaded:', matches.length);
 
-    allMatches = matches.sort(
-      (a,b) => sortKey(a).localeCompare(sortKey(b))
-    );
-
-    allTeams = [
-      ...new Set(
-        matches.map(m =>
-          isTrinity(m.team1)
-            ? m.team1
-            : m.team2
-        )
-      )
-    ].sort();
-    
-    DATE_ORDER = [
-    ...new Set(
-      matches.map(m => m.date_str)
-    )
-
-    
-];
-
-TODAY_DATE = DATE_ORDER[0] || '';
-
+    processMatches(matches);
 
   buildTeamFilters(allTeams);
 
@@ -622,10 +719,26 @@ TODAY_DATE = DATE_ORDER[0] || '';
 }
 
 function applyLadder(ladderData){
-  const lm = {};
-  for (const [id,e] of Object.entries(ladderData.ladder||{})){
-    lm[parseInt(id)] = e;
+  const entries = ladderData.ladders || [];
+
+  const divCounts = {};
+  for (const e of entries){
+    divCounts[e.divisionId] = (divCounts[e.divisionId] || 0) + 1;
   }
+
+  const lm = {};
+  for (const e of entries){
+    const id = parseInt(e.id);
+    if (!id) continue;
+    lm[id] = {
+      rank: parseInt(e.rk),
+      totalTeams: divCounts[e.divisionId] || 1,
+      wins: e.W,
+      losses: e.L,
+      points: e.PTS
+    };
+  }
+
   ladderMap = lm;
   renderAll(allMatches.length ? allMatches : BAKED_MATCHES, ladderMap);
 }
@@ -737,6 +850,42 @@ function enrichMatch(m, round) {
 }
 
 // ── Render ────────────────────────────────────────────────────
+// Age groups, in display order. Anything unrecognised falls in "Other".
+const AGE_GROUP_ORDER = ['U11','U13','U15','U17','Open','Other'];
+
+function ageGroup(m){
+  const src = m.div_short || '';
+  const num = src.match(/(\d+)\s*&\s*U/i);
+  if (num) return 'U' + num[1];
+  if (/open/i.test(src)) return 'Open';
+  return 'Other';
+}
+
+// Groups a list of matches by age group (in AGE_GROUP_ORDER) and renders
+// each group with its own header, cards sorted LIVE-first then by time.
+function renderCardsByAgeGroup(matches, lmap){
+  const groups = {};
+  for (const m of matches){
+    const ag = ageGroup(m);
+    (groups[ag] = groups[ag] || []).push(m);
+  }
+  const order = [
+    ...AGE_GROUP_ORDER.filter(ag => groups[ag]),
+    ...Object.keys(groups).filter(ag => !AGE_GROUP_ORDER.includes(ag))
+  ];
+
+  return order.map(ag => {
+    const list = groups[ag].slice().sort((a,b)=>sortKey(a).localeCompare(sortKey(b)));
+    return `<div class="agegrp" data-age="${esc(ag)}">
+      <div class="agehead">
+        <span class="albl">${esc(ag)}</span>
+        <span class="acnt">${list.length} match${list.length!==1?'es':''}</span>
+      </div>
+      ${list.map(m=>makeCard(m,lmap)).join('')}
+    </div>`;
+  }).join('');
+}
+
 function renderAll(matches, lmap){
   const today     = matches.filter(m=>m.date_str===TODAY_DATE);
   const todayLive = today.filter(m=>m.result==='LIVE').length;
@@ -755,22 +904,29 @@ function renderAll(matches, lmap){
     `<span class="chip chip-rem">${todayRem} Upcoming</span>`,
   ].join('');
 
-  // Today cards — LIVE first, then by start time
-  const todaySorted = [...today].sort((a,b)=>sortKey(a).localeCompare(sortKey(b)));
-  document.getElementById('today-cards').innerHTML = todaySorted.map(m=>makeCard(m,lmap)).join('');
+  // Match Day header — round + date being shown
+  const todayDateEl = document.getElementById('today-date');
+  if (todayDateEl){
+    todayDateEl.textContent = today.length
+      ? `${today[0].round}${today[0].round?' · ':''}${TODAY_DATE}`
+      : (TODAY_DATE || 'No matches scheduled');
+  }
 
-  // Schedule sections
+  // Today cards — grouped by age group, LIVE first then by start time within each group
+  document.getElementById('today-cards').innerHTML = renderCardsByAgeGroup(today, lmap);
+
+  // Schedule sections — one per date, each split into age groups
   let shtml='';
   for (const date of DATE_ORDER){
-    const day = matches.filter(m=>m.date_str===date).sort((a,b)=>a.start.localeCompare(b.start));
+    const day = matches.filter(m=>m.date_str===date);
     if (!day.length) continue;
     const isToday = date===TODAY_DATE;
     shtml+=`<section class="dsec" data-date="${esc(date)}">
       <div class="dhead">
-        <span class="dlbl">${isToday?'🔴 Today — ':''}${esc(date)}</span>
+        <span class="dlbl">${isToday?'🔴 Match Day — ':''}${esc(date)}</span>
         <span class="dcnt">${day.length} match${day.length!==1?'es':''}</span>
       </div>
-      ${day.map(m=>makeCard(m,lmap)).join('')}
+      ${renderCardsByAgeGroup(day, lmap)}
     </section>`;
   }
   document.getElementById('sched-list').innerHTML = shtml;
@@ -843,6 +999,9 @@ function applyTodayFilter(){
            &&(todayTeamFilter==='all'||c.dataset.team===todayTeamFilter);
     c.classList.toggle('hidden',!ok); if(ok)v++;
   });
+  document.querySelectorAll('#today-cards .agegrp').forEach(g=>{
+    g.classList.toggle('hidden', g.querySelectorAll('.card:not(.hidden)').length===0);
+  });
   document.getElementById('today-count').textContent=`Showing ${v} match${v!==1?'es':''}`;
   document.getElementById('today-empty').classList.toggle('hidden',v>0);
 }
@@ -853,6 +1012,9 @@ function applySchedFilter(){
     const ok=(schedResultFilter==='all'||c.dataset.result===schedResultFilter||c.dataset.round===schedResultFilter)
            &&(schedTeamFilter==='all'||c.dataset.team===schedTeamFilter);
     c.classList.toggle('hidden',!ok); if(ok)v++;
+  });
+  document.querySelectorAll('#sched-list .agegrp').forEach(g=>{
+    g.classList.toggle('hidden', g.querySelectorAll('.card:not(.hidden)').length===0);
   });
   document.querySelectorAll('#sched-list .dsec').forEach(s=>{
     s.style.display=s.querySelectorAll('.card:not(.hidden)').length?'':'none';
